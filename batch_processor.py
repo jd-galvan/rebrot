@@ -398,7 +398,7 @@ def __enhance_faces(original_image, binary_mask, face_boxes, inpainted_image, fo
                 enhanced_face_with_transparency, (x2, y1-enhanced_face.size[1]), enhanced_face_with_transparency)
 
             # Delete images of face and face mask
-            delete_files([face_image_path, face_mask_path])
+            #delete_files([face_image_path, face_mask_path])
     return inpainted_image
 
 

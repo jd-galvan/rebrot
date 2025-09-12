@@ -35,11 +35,11 @@ print(f"DEVICE {DEVICE}")
 
 # Cargar modelos
 # captioning_model = BLIP(DEVICE)
-segmentation_model = SAM2(DEVICE)
-impainting_model = SDImpainting(DEVICE)
+#segmentation_model = SAM2(DEVICE)
+#impainting_model = SDImpainting(DEVICE)
 # impainting_model = FluxImpainting(DEVICE)
 yolo_model = YOLOV8(device=DEVICE)
-face_detector = LangSAMFaceExtractor(device=DEVICE)
+#face_detector = LangSAMFaceExtractor(device=DEVICE)
 # Lista Yolos entrenado
 
 face_mask = None
@@ -48,22 +48,24 @@ face_boxes = None
 
 def list_best_pt():
     # Buscar todos los archivos best.pt dentro de cualquier carpeta dentro de detect
-    paths = glob.glob("./tools/trainer/yolov8/runs/detect/*/weights/best.pt")
+    #paths = glob.glob("./tools/trainer/yolov8/runs/detect/*/weights/best.pt")
 
-    # Extraer un número si lo hay (por ejemplo, para ordenarlo), o simplemente usar el nombre como clave
-    def extract_number(path):
-        # Intenta buscar un número al final del nombre del directorio contenedor
-        match = re.search(r'detect/([^/]+)', path)
-        if match:
-            name = match.group(1)
-            num_match = re.search(r'(\d+)', name)
-            return int(num_match.group(1)) if num_match else 0
-        return 0
+    paths = ["./tools/trainer/yolov8/runs/detect/full_dataset_yolov8x10_17/weights/best.pt"]
+
+    ## Extraer un número si lo hay (por ejemplo, para ordenarlo), o simplemente usar el nombre como clave
+    #def extract_number(path):
+        ## Intenta buscar un número al final del nombre del directorio contenedor
+        #match = re.search(r'detect/([^/]+)', path)
+        #if match:
+            #name = match.group(1)
+            #num_match = re.search(r'(\d+)', name)
+            #return int(num_match.group(1)) if num_match else 0
+        #return 0
 
     # Ordenar (puedes cambiar reverse a False si quieres del más viejo al más nuevo)
-    paths.sort(key=extract_number, reverse=True)
+    #paths.sort(key=extract_number, reverse=True)
 
-    print(f"Modelos YOLO encontrados: {len(paths)}")
+    #print(f"Modelos YOLO encontrados: {len(paths)}")
 
     if paths:
         # Cargar el más "nuevo" según el criterio de orden
@@ -94,13 +96,24 @@ def on_image_load(image_path):
         print(f"Error en la generación del caption: {e}")
         return "Error en la generación del caption"
 
+# Gradio application
 
-# Construcción de la interfaz en Gradio
-with gr.Blocks() as demo:
-    gr.Markdown("# AI Impainter")
-    gr.Markdown(
-        "Con YOLOV8"
+with gr.Blocks(css="""
+#logo_box { 
+    width: 100% !important;   /* el marco ocupa todo el ancho */
+    text-align: center;       /* centramos la imagen */
+}
+#logo_box img {
+    height: 100px;            /* alto fijo de la imagen */
+    width: auto;              /* conserva proporción */
+}
+""") as demo:
+    gr.Image(
+        value="static/logo.png",
+        show_label=False,
+        elem_id="logo_box"
     )
+
 
     with gr.Row():
         img = gr.Image(label="Input Image", type="filepath")
@@ -218,6 +231,7 @@ with gr.Blocks() as demo:
 
                 # Mezclar multiples mascaras de SAM
                 numpy_masks = [mask.cpu().numpy() for mask in masks]
+
                 combined_mask = np.zeros_like(numpy_masks[0], dtype=bool)
                 for m in numpy_masks:
                     combined_mask = np.logical_or(combined_mask, m)

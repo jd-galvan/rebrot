@@ -52,7 +52,6 @@ class SegformerInference:
     def get_mask(self, image: np.ndarray):
         # Convertir la imagen numpy a PIL
         image = Image.fromarray(image).convert('RGB')
-        print(image.size)
 
         # Aplicar transformaciones y mover al dispositivo
         image_tensor = self.processor(images=image.resize(

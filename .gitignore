@@ -192,3 +192,6 @@ dataset*/
 .gradio/
 nohup.out
 *.csv
+resultados_benchmark/
+tools/evaluator/*.csv
+!logo.png

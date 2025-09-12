@@ -1,18 +1,18 @@
-# 🎨 AI Impainter
+![Logo](static/logo.png)
 
 ## ✨ Descripción
 
-`ai-impainter` es una aplicación en Python diseñada para realizar impainting a fotografías utilizando modelos avanzados de inteligencia artificial y procesamiento de imágenes. Este proyecto ha sido desarrollado en la **Universidad Politécnica de Valencia (UPV)** como parte del proyecto **Salvem Les Fotos**.
+`rebrot` es una aplicación en Python diseñada para realizar impainting a fotografías utilizando modelos avanzados de inteligencia artificial y procesamiento de imágenes. Este proyecto ha sido desarrollado en la **Universidad Politécnica de Valencia (UPV)** como parte del proyecto **Salvem Les Fotos**.
 
 Hace uso de las siguientes tecnologías:
 
 - 🔍 **YoloV8** para detección automática de regiones con manchas.
-- 🔬 **SAM2** (Segment Anything Model v2) para la segmentación de manchas.
-- 🧠 **UNet** para la segmentación precisa y refinada de regiones afectadas.
+- 🔬 **SAM2** (Segment Anything Model v2) para la segmentación de manchas. (Alternativa 1)
+- 🧠 **UNet** para la segmentación precisa de regiones afectadas. (Alternativa 2)
+- 🤖 **SegFormer** para la segmentación precisa de regiones afectadas. (Alternativa 3)
 - 👤 **LangSAM** para la detección de rostros.
 - 🎨 **Stable Diffusion Inpainting XL** para la restauración de imágenes.
 - 🏞️  **OpenCV** para el procesamiento de imágenes.
-- 👀 **BLIP** (Bootstrapped Language-Image Pretraining) para mejorar la interpretación de la imagen.
 - 🌐 **Gradio** para la creación de una interfaz web accesible.
 
 ## ⚙️ Requisitos
@@ -25,8 +25,8 @@ Hace uso de las siguientes tecnologías:
 ### 1️⃣ Clonar el repositorio
 
 ```bash
- git clone https://github.com/jd-galvan/ai-impainter.git
- cd ai-impainter
+ git clone https://github.com/jd-galvan/rebrot.git
+ cd rebrot
 ```
 
 ### 2️⃣ Crear y activar un entorno virtual (opcional pero recomendado)
@@ -66,7 +66,7 @@ Este proyecto requiere la configuración de variables de entorno para su correct
 Para ejecutar la aplicación, simplemente corre el siguiente comando:
 
 ```bash
-python main.py
+python main_yolo.py
 ```
 
 Esto iniciará una interfaz web con **Gradio** donde podrás cargar imágenes y procesarlas para eliminar manchas.

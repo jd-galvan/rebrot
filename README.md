@@ -1,86 +1,87 @@
 ![Logo](static/logo.png)
 
-## ✨ Descripción
+## ✨ Description
 
-`rebrot` es una aplicación en Python diseñada para realizar impainting a fotografías utilizando modelos avanzados de inteligencia artificial y procesamiento de imágenes. Este proyecto ha sido desarrollado en la **Universidad Politécnica de Valencia (UPV)** como parte del proyecto **Salvem Les Fotos**.
+`rebrot` is a Python application designed to perform **image inpainting** on photographs using advanced artificial intelligence and image processing models. This project was developed at the **Polytechnic University of Valencia (UPV)** as part of the **Salvem Les Fotos** initiative.
 
-Hace uso de las siguientes tecnologías:
+It uses the following technologies:
 
-- 🔍 **YoloV8** para detección automática de regiones con manchas.
-- 🔬 **SAM2** (Segment Anything Model v2) para la segmentación de manchas. (Alternativa 1)
-- 🧠 **UNet** para la segmentación precisa de regiones afectadas. (Alternativa 2)
-- 🤖 **SegFormer** para la segmentación precisa de regiones afectadas. (Alternativa 3)
-- 👤 **LangSAM** para la detección de rostros.
-- 🎨 **Stable Diffusion Inpainting XL** para la restauración de imágenes.
-- 🏞️  **OpenCV** para el procesamiento de imágenes.
-- 🌐 **Gradio** para la creación de una interfaz web accesible.
+* 🔍 **YoloV8** for automatic detection of stained or damaged regions.
+* 🔬 **SAM2** (Segment Anything Model v2) for stain segmentation. (Alternative 1)
+* 🧠 **UNet** for precise segmentation of affected regions. (Alternative 2)
+* 🤖 **SegFormer** for precise segmentation of affected regions. (Alternative 3)
+* 👤 **LangSAM** for face detection.
+* 🎨 **Stable Diffusion Inpainting XL** for image restoration.
+* 🏞️ **OpenCV** for image processing.
+* 🌐 **Gradio** for building an accessible web interface.
 
-## ⚙️ Requisitos
+## ⚙️ Requirements
 
-- 🐍 Python >= 3.10
-- 🚀 CUDA-compatible GPU (opcional, pero recomendado para un mejor rendimiento)
+* 🐍 Python >= 3.10
+* 🚀 CUDA-compatible GPU (optional, but recommended for better performance)
 
-## 📥 Instalación
+## 📥 Installation
 
-### 1️⃣ Clonar el repositorio
+### 1️⃣ Clone the repository
 
 ```bash
- git clone https://github.com/jd-galvan/rebrot.git
- cd rebrot
+git clone https://github.com/jd-galvan/rebrot.git
+cd rebrot
 ```
 
-### 2️⃣ Crear y activar un entorno virtual (opcional pero recomendado)
+### 2️⃣ Create and activate a virtual environment (optional but recommended)
 
 ```bash
 python -m venv venv
-source venv/bin/activate  # En Linux/macOS
-venv\Scripts\activate  # En Windows
+source venv/bin/activate  # On Linux/macOS
+venv\Scripts\activate    # On Windows
 ```
 
-### 3️⃣ Instalar las dependencias
+### 3️⃣ Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## 🛠️ Configuración de Variables de Entorno
+## 🛠️ Environment Variables Configuration
 
-Este proyecto requiere la configuración de variables de entorno para su correcto funcionamiento. Se proporciona un archivo `.env-example` como referencia.
+This project requires certain environment variables to function properly. An example file `.env-example` is provided as a reference.
 
-### 📌 Pasos:
+### 📌 Steps:
 
-1. Copia el archivo `.env-example` y renómbralo como `.env`:
+1. Copy the `.env-example` file and rename it to `.env`:
+
    ```bash
    cp .env-example .env
    ```
-2. Edita el archivo `.env` y completa los valores de las siguientes variables:
+2. Edit the `.env` file and fill in the following values:
+
    ```env
-   CUDA_DEVICE=cuda:0  # Puedes configurar "cuda:0", "cuda:1" o la tarjeta gráfica que desees usar.
-   HUGGINGFACE_HUB_TOKEN=tu_token_aquí
-   APP_USER=usuario_que_definas_para_acceder_a_app
-   APP_PASSWORD=password_que_definas_para_acceder_a_app
+   CUDA_DEVICE=cuda:0  # You can set it to "cuda:0", "cuda:1", or whichever GPU you wish to use.
+   HUGGINGFACE_HUB_TOKEN=your_token_here
+   APP_USER=your_app_username
+   APP_PASSWORD=your_app_password
    ```
 
-## 🚀 Uso
+## 🚀 Usage
 
-Para ejecutar la aplicación, simplemente corre el siguiente comando:
+To run the application, simply execute the following command:
 
 ```bash
 python main_yolo.py
 ```
 
-Esto iniciará una interfaz web con **Gradio** donde podrás cargar imágenes y procesarlas para eliminar manchas.
+This will launch a **Gradio** web interface where you can upload and process images to remove stains.
 
-## 🤝 Contribuciones
+## 🤝 Contributions
 
-Las contribuciones son bienvenidas. Si deseas mejorar el proyecto, por favor:
+Contributions are welcome! If you'd like to improve the project, please:
 
-1. Haz un fork del repositorio.
-2. Crea una nueva rama (`git checkout -b mi-nueva-caracteristica`).
-3. Realiza tus cambios y confirma los commits.
-4. Envía un pull request.
+1. Fork the repository.
+2. Create a new branch (`git checkout -b my-new-feature`).
+3. Make your changes and commit them.
+4. Submit a pull request.
 
-## 📜 Licencia
+## 📜 License
 
-Este proyecto está bajo la licencia MIT. Para más detalles, consulta el archivo `LICENSE`. 🚀
-
+This project is licensed under the MIT License. For more details, see the `LICENSE` file. 🚀

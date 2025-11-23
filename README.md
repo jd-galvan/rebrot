@@ -20,6 +20,10 @@ It uses the following technologies:
 * 🐍 Python >= 3.10
 * 🚀 CUDA-compatible GPU (optional, but recommended for better performance)
 
+## 🧠 AI Models
+
+For now, the Yolo, UNet, and Segformer models are not publicly available. They will be soon.
+
 ## 📥 Installation
 
 ### 1️⃣ Clone the repository

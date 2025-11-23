@@ -39,10 +39,10 @@ impainting_model = SDImpainting(DEVICE)
 yolo_model = YOLOV8(device=DEVICE)
 segformer_model = SegformerInference("cuda:1")
 
-paths = glob.glob("./tools/trainer/yolov8/runs/detect/*/weights/best.pt")
+#paths = glob.glob("./tools/trainer/yolov8/runs/detect/*/weights/best.pt")
 print("YOLO models available")
-print(paths)
-yolo_path = paths[10]
+#print(paths)
+yolo_path = "./tools/trainer/yolov8/runs/detect/full_dataset_yolov8x10_17/weights/best.pt"
 print(f"Yolo model to use {yolo_path}")
 yolo_model.set_model(yolo_path)
 
@@ -498,5 +498,5 @@ with gr.Blocks(title="AI-Impainter: Restauración de Fotos de la DANA") as demo:
 
 
 # Lanzamos la interfaz de Gradio.
-demo.launch(debug=True, auth=(os.environ.get(
+demo.launch(server_name="0.0.0.0", server_port=7861, debug=True, auth=(os.environ.get(
     "APP_USER"), os.environ.get("APP_PASSWORD")))

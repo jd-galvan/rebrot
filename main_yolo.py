@@ -25,6 +25,9 @@ from utils import (
 # Cargando variables de entorno
 load_dotenv()
 
+# Carpeta temporal para gradio
+os.makedirs(os.environ.get("GRADIO_TEMP_DIR"), exist_ok=True)
+
 # Rutas de archivos generados
 RUTA_MASCARA = "processed_mask.png"
 RUTA_IMAGEN_FINAL = "final_output.png"
@@ -35,11 +38,11 @@ print(f"DEVICE {DEVICE}")
 
 # Cargar modelos
 # captioning_model = BLIP(DEVICE)
-#segmentation_model = SAM2(DEVICE)
-#impainting_model = SDImpainting(DEVICE)
+segmentation_model = SAM2(DEVICE)
+impainting_model = SDImpainting(DEVICE)
 # impainting_model = FluxImpainting(DEVICE)
 yolo_model = YOLOV8(device=DEVICE)
-#face_detector = LangSAMFaceExtractor(device=DEVICE)
+face_detector = LangSAMFaceExtractor(device=DEVICE)
 # Lista Yolos entrenado
 
 face_mask = None
@@ -48,22 +51,22 @@ face_boxes = None
 
 def list_best_pt():
     # Buscar todos los archivos best.pt dentro de cualquier carpeta dentro de detect
-    #paths = glob.glob("./tools/trainer/yolov8/runs/detect/*/weights/best.pt")
+    paths = glob.glob("./tools/trainer/yolov8/runs/detect/*/weights/best.pt")
 
-    paths = ["./tools/trainer/yolov8/runs/detect/full_dataset_yolov8x10_17/weights/best.pt"]
+    #paths = ["./tools/trainer/yolov8/runs/detect/full_dataset_yolov8x10_17/weights/best.pt"]
 
-    ## Extraer un número si lo hay (por ejemplo, para ordenarlo), o simplemente usar el nombre como clave
-    #def extract_number(path):
-        ## Intenta buscar un número al final del nombre del directorio contenedor
-        #match = re.search(r'detect/([^/]+)', path)
-        #if match:
-            #name = match.group(1)
-            #num_match = re.search(r'(\d+)', name)
-            #return int(num_match.group(1)) if num_match else 0
-        #return 0
+    # Extraer un número si lo hay (por ejemplo, para ordenarlo), o simplemente usar el nombre como clave
+    def extract_number(path):
+        # Intenta buscar un número al final del nombre del directorio contenedor
+        match = re.search(r'detect/([^/]+)', path)
+        if match:
+            name = match.group(1)
+            num_match = re.search(r'(\d+)', name)
+            return int(num_match.group(1)) if num_match else 0
+        return 0
 
     # Ordenar (puedes cambiar reverse a False si quieres del más viejo al más nuevo)
-    #paths.sort(key=extract_number, reverse=True)
+    paths.sort(key=extract_number, reverse=True)
 
     #print(f"Modelos YOLO encontrados: {len(paths)}")
 
